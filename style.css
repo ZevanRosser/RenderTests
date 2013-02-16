@@ -1,0 +1,11 @@
+body,html{
+  padding : 0px;
+  margin : 0px; 
+}
+#world{
+  position : absolute;
+  width : 600px;
+  height : 600px;
+  background-color : black;
+  overflow : hidden;
+}
