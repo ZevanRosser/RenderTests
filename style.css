@@ -9,3 +9,7 @@ body,html{
   background-color : black;
   overflow : hidden;
 }
+#initTime{
+  position: absolute;
+  top : 600px;
+}

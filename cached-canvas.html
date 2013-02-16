@@ -9,10 +9,11 @@
     <title>Cached Canvas</title>
     <script>
       window.onload = function(){
-        var canvas = document.getElementById("canvas"),
+        var howMany = window.location.href.split("?"),
+            canvas = document.getElementById("canvas"),
             c = canvas.getContext("2d"),
             TWO_PI = Math.PI * 2,
-            num = 50,
+            num = (howMany.length > 1) ? parseInt(howMany[1]) : 50,
             circles = [],
             polys = [],
             stats = new Stats(),
@@ -110,6 +111,7 @@
           polys.push(new Poly(halfWidth,halfHeight,Math.random()*TWO_PI));
         }
         initTime = document.createElement("div");
+        initTime.id = "initTime";
         initTime.style.padding = "10px";
         initTime.innerHTML = "instantiation : " + (+new Date() - startTime) + "ms";
         document.body.appendChild(initTime);

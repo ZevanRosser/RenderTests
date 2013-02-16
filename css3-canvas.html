@@ -9,9 +9,10 @@
     <title>CSS3 &amp; Canvas</title>
     <script>
       window.onload = function(){
-        var world = document.getElementById("world"),
+        var howMany = window.location.href.split("?"),
+            world = document.getElementById("world"),
             TWO_PI = Math.PI * 2,
-            num = 50,
+            num = (howMany.length > 1) ? parseInt(howMany[1]) : 50,
             circles = [],
             polys = [],
             stats = new Stats(),
@@ -20,8 +21,6 @@
             halfWidth = 300,
             halfHeight = 300,
             prefix = getVendorPrefix();
-        
-        world.style[prefix + "perspective"] = 1000;
         
         function Mover(x, y, rotation){
           this.x = x;
@@ -71,8 +70,8 @@
         Poly.prototype = new Mover();
         Poly.prototype.constructor = Poly;
         Poly.prototype.draw = function(){
-          this.canvas.style[prefix + "Transform"] = "translate3d("+parseInt(this.x)
-            +"px,"+parseInt(this.y)+"px,0px)"
+          this.canvas.style[prefix + "Transform"] = "translate("+parseInt(this.x)
+            +"px,"+parseInt(this.y)+"px)"
             +"rotate("+this.rotation+"deg)";
         };
         
@@ -97,8 +96,8 @@
         Circle.prototype = new Mover();
         Circle.prototype.constructor = Circle;
         Circle.prototype.draw = function(){
-          this.canvas.style[prefix + "Transform"] = "translate3d("+parseInt(this.x)
-            +"px,"+parseInt(this.y)+"px,0px)"
+          this.canvas.style[prefix + "Transform"] = "translate("+parseInt(this.x)
+            +"px,"+parseInt(this.y)+"px)"
             +"rotate("+this.rotation+"deg)";
         };
         
@@ -110,6 +109,7 @@
           polys.push(new Poly(halfWidth,halfHeight,Math.random()*360));
         }
         initTime = document.createElement("div");
+        initTime.id = "initTime";
         initTime.style.padding = "10px";
         initTime.innerHTML = "instantiation : " + (+new Date() - startTime) + "ms";
         document.body.appendChild(initTime);

@@ -3,14 +3,15 @@
   <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="style.css">
+    <script src="getvendorprefix.js"></script>
     <script src="requestanimationframe.js"></script>
     <script src="stats.js"></script>
-    <title>Normal Canvas</title>
+    <title>CSS3 &amp; Canvas Top Left</title>
     <script>
       window.onload = function(){
+   
         var howMany = window.location.href.split("?"),
-            canvas = document.getElementById("canvas"),
-            c = canvas.getContext("2d"),
+            world = document.getElementById("world"),
             TWO_PI = Math.PI * 2,
             num = (howMany.length > 1) ? parseInt(howMany[1]) : 50,
             circles = [],
@@ -18,11 +19,13 @@
             stats = new Stats(),
             startTime,
             initTime,
-            halfWidth = canvas.width / 2,
-            halfHeight = canvas.height / 2;
+            halfWidth = 300,
+            halfHeight = 300,
+            prefix = getVendorPrefix();
         
-        c.fillStyle = "black";
-        c.fillRect(0,0,canvas.width, canvas.height);
+        world.style[prefix + "perspective"] = 1000;
+        
+         
         
         function Mover(x, y, rotation){
           this.x = x;
@@ -51,53 +54,65 @@
         
         function Poly(x, y, rotation){
           Mover.call(this, x, y, rotation);
+          this.canvas = document.createElement("canvas"),
+          this.c = this.canvas.getContext("2d");
+          this.canvas.width = 102;
+          this.canvas.height = 142;
+          this.c.fillStyle = "gray";
+          this.c.strokeStyle = "white";
+          this.c.beginPath();
+          this.c.moveTo(0,0);  
+          this.c.lineTo(100,80);
+          this.c.lineTo(55,140);
+          this.c.lineTo(0,100);
+          this.c.closePath();
+          this.c.fill();
+          this.c.stroke();
+          
+          this.canvas.style.position = "absolute";
+          world.appendChild(this.canvas);
         }
         Poly.prototype = new Mover();
         Poly.prototype.constructor = Poly;
         Poly.prototype.draw = function(){
-          c.save();
-          c.translate(this.x, this.y);
-          c.rotate(this.rotation);
-          c.fillStyle = "gray";
-          c.strokeStyle = "white";
-          c.beginPath();
-          c.moveTo(-50,-50);  
-          c.lineTo(50,30);
-          c.lineTo(5,90);
-          c.lineTo(-50,50);
-          c.closePath();
-          c.fill();
-          c.stroke();
-          c.restore();
+          this.canvas.style.left = this.x + "px";
+          this.canvas.style.top = this.y + "px";
+          this.canvas.style[prefix + "Transform"] = "rotateZ("+this.rotation+"deg)"; 
         };
         
         
         function Circle(x, y, rotation){
           Mover.call(this, x, y, rotation);
+          var radius = 20;
+          this.canvas = document.createElement("canvas"),
+          this.c = this.canvas.getContext("2d");
+          this.canvas.width = this.canvas.height = radius * 2 + 2;
+          this.c.fillStyle = "red";
+          this.c.strokeStyle = "white";
+          this.c.beginPath();
+          this.c.arc(radius+1,radius+1,radius, 0, TWO_PI, false);
+          this.c.moveTo(radius+1,radius+1);
+          this.c.lineTo(radius*2+1,radius+1);
+          this.c.fill();
+          this.c.stroke();
+          this.canvas.style.position = "absolute";
+          world.appendChild(this.canvas);
         }
         Circle.prototype = new Mover();
         Circle.prototype.constructor = Circle;
         Circle.prototype.draw = function(){
-          c.save();
-          c.translate(this.x, this.y);
-          c.rotate(this.rotation);
-          c.fillStyle = "orange";
-          c.strokeStyle = "white";
-          c.beginPath();
-          c.arc(0,0,20, 0, TWO_PI, false);
-          c.moveTo(0,0);
-          c.lineTo(0,20);
-          c.fill();
-          c.stroke();
-          c.restore();
+          this.canvas.style.left = this.x + "px";
+          this.canvas.style.top = this.y + "px";
+          this.canvas.style[prefix + "Transform"] = "rotateZ("+this.rotation+"deg)"; 
+            
         };
         
         startTime = +new Date();
         for (var i = 0; i < num; i++){
-          circles.push(new Circle(halfWidth,halfHeight,Math.random()*TWO_PI));
+          circles.push(new Circle(halfWidth,halfHeight,Math.random()*360));
         }
         for (var i = 0; i < num; i++){
-          polys.push(new Poly(halfWidth,halfHeight,Math.random()*TWO_PI));
+          polys.push(new Poly(halfWidth,halfHeight,Math.random()*360));
         }
         initTime = document.createElement("div");
         initTime.id = "initTime";
@@ -115,9 +130,6 @@
           
           stats.begin();
           
-          c.fillStyle = "black";
-          c.fillRect(0,0,canvas.width, canvas.height);
-          
           for(var i = 0; i < num; i++){
             circles[i].run(); 
             polys[i].run();
@@ -132,6 +144,6 @@
     </script>
   </head>
   <body>
-    <canvas id="canvas" width="600" height="600"></canvas>
+    <div id="world"></div>
   </body>
 </html>
