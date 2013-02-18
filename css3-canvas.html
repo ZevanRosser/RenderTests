@@ -50,7 +50,7 @@
         function Poly(x, y, rotation){
           Mover.call(this, x, y, rotation);
           this.canvas = document.createElement("canvas"),
-          this.c = this.canvas.getContext("2d");
+            this.c = this.canvas.getContext("2d");
           this.canvas.width = 102;
           this.canvas.height = 142;
           this.c.fillStyle = "gray";
@@ -80,7 +80,7 @@
           Mover.call(this, x, y, rotation);
           var radius = 20;
           this.canvas = document.createElement("canvas"),
-          this.c = this.canvas.getContext("2d");
+            this.c = this.canvas.getContext("2d");
           this.canvas.width = this.canvas.height = radius * 2 + 2;
           this.c.fillStyle = "red";
           this.c.strokeStyle = "white";

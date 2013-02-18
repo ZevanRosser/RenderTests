@@ -73,6 +73,7 @@
           c.save();
           c.translate(this.x, this.y);
           c.rotate(this.rotation);
+          //canvas.globalCompositeOperation = "destination-in";
           c.drawImage(this.canvas, 0, 0);
           c.restore();
         };
@@ -99,6 +100,7 @@
           c.save();
           c.translate(this.x, this.y);
           c.rotate(this.rotation);
+          //canvas.globalCompositeOperation = "destination-in";
           c.drawImage(this.canvas, 0, 0);
           c.restore();
         };

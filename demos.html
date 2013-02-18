@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Render Tests</title>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script>
+     $(function(){
+
+       var current = $("#current");
+       $("a").click(function(){
+         current.html($(this).html());
+       });
+
+     });
+    </script>
+  <style>
+    iframe{
+      border : 1px solid black; 
+    }
+    input{
+      width : 200px; 
+    }
+  </style>
+</head>
+<body>
+  <h1>Render Tests</h1>
+  <p>Brace yourself, these results when tested in multiple browser may cause intense feelings of infuration and perplexity.</p>
+  
+  <a href="normal-canvas.html?100" target="frame">Normal Canvas</a><br>
+  <a href="cached-canvas.html?100" target="frame">Cached Canvas</a><br>
+  <a href="css3-canvas.html?100" target="frame">CSS3 &amp; Canvas</a><br>
+  <a href="css3d-canvas.html?100" target="frame">CSS3D &amp; Canvas</a><br>
+  <a href="css3-top-left-canvas.html?100" target="frame">CSS3 Top Left Canvas</a><br>
+  <a href="css3d-top-left-canvas.html?100" target="frame">CSS3D Top Left Canvas</a><br><br>
+  <h2>Current Demo : <span id="current">Normal Canvas</span></h2>
+  <iframe id="frame" name="frame" src="normal-canvas.html?100" width="600" height="640"></iframe>
+</body>
+</html>
+
