@@ -4,7 +4,7 @@ RenderTests
 Comparing different 2D web based rendering techniques. The results seem to vary significantly from browser to browser. Unfortunately it looks like there is no one technique that will always be fast across the board.
 
 Check out the demo page and be sure to try it in a few different browsers:
-[Render Test Demos](url)
+[Render Test Demos](http://zevanrosser.github.com/RenderTests/demos.html)
 
 ### Normal Canvas
 --------------
