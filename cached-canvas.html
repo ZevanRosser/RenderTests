@@ -74,7 +74,12 @@
           c.translate(this.x, this.y);
           c.rotate(this.rotation);
           //canvas.globalCompositeOperation = "destination-in";
-          c.drawImage(this.canvas, 0, 0);
+          c.drawImage(this.canvas, 0, 0, 
+                      this.canvas.width,
+                      this.canvas.height,
+                      0, 0, 
+                      this.canvas.width,
+                      this.canvas.height);
           c.restore();
         };
         
@@ -101,7 +106,12 @@
           c.translate(this.x, this.y);
           c.rotate(this.rotation);
           //canvas.globalCompositeOperation = "destination-in";
-          c.drawImage(this.canvas, 0, 0);
+          c.drawImage(this.canvas, 0, 0, 
+                      this.canvas.width,
+                      this.canvas.height,
+                      0, 0, 
+                      this.canvas.width,
+                      this.canvas.height);
           c.restore();
         };
         

@@ -13,17 +13,17 @@
             world = document.getElementById("world"),
             TWO_PI = Math.PI * 2,
             num = (howMany.length > 1) ? parseInt(howMany[1]) : 50,
-            circles = [],
-            polys = [],
-            stats = new Stats(),
-            startTime,
-            initTime,
-            halfWidth = 300,
-            halfHeight = 300,
-            prefix = getVendorPrefix();
+              circles = [],
+                polys = [],
+                  stats = new Stats(),
+                    startTime,
+                      initTime,
+                        halfWidth = 300,
+                          halfHeight = 300,
+                            prefix = getVendorPrefix();
         
         world.style[prefix + "perspective"] = 1000;
-        world.style[prefix + "BackfaceVisibility"] = "hidden";
+        
         
         
         function Mover(x, y, rotation){
@@ -77,7 +77,7 @@
         Poly.prototype.draw = function(){
           this.canvas.style[prefix + "Transform"] = "translate3d("+parseInt(this.x)
             +"px,"+parseInt(this.y)+"px,0px)"
-            +"rotateZ("+this.rotation+"deg)";
+            +" rotateZ("+this.rotation+"deg)";
         };
         
         
@@ -104,7 +104,7 @@
         Circle.prototype.draw = function(){
           this.canvas.style[prefix + "Transform"] = "translate3d("+parseInt(this.x)
             +"px,"+parseInt(this.y)+"px,0px)"
-            +"rotateZ("+this.rotation+"deg)";
+            +" rotateZ("+this.rotation+"deg)";
         };
         
         startTime = +new Date();
@@ -126,8 +126,22 @@
         stats.domElement.style.top = '0px';
         document.body.appendChild(stats.domElement);
         
-        (function loop(){
-          
+        /*(function loop(){
+        
+        stats.begin();
+        
+        for(var i = 0; i < num; i++){
+        circles[i].run(); 
+        polys[i].run();
+      }
+        
+        stats.end();
+        
+        requestAnimationFrame(loop);
+        
+      })();*/
+        
+        setInterval(function(){
           stats.begin();
           
           for(var i = 0; i < num; i++){
@@ -136,10 +150,9 @@
           }
           
           stats.end();
-          
-          requestAnimationFrame(loop);
-          
-        })();
+        }, 1000 / 60);
+        
+        
       };
     </script>
   </head>

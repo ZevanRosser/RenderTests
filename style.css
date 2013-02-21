@@ -6,8 +6,16 @@ body,html{
   position : absolute;
   width : 600px;
   height : 600px;
-  background-color : black;
+  background-color : blue;
   overflow : hidden;
+  -webkit-transform-style: preserve-3d; 
+  -webkit-perspective: 662.6901020897532px;
+  -webkit-backface-visibility : hidden;
+}
+#world canvas{
+  -webkit-transform-style: preserve-3d; 
+  -webkit-perspective: 1000;
+  -webkit-backface-visibility : hidden;
 }
 #initTime{
   position: absolute;
